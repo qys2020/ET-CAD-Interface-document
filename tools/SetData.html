@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>SetData</title>
+
+</head>
+<style>
+	.data-box textarea {
+		width: 850px;
+		height: 600px;
+	}
+
+	body {
+		text-align: center;
+	}
+
+	button {
+		width: 120px;
+		height: 40px;
+
+	}
+</style>
+
+<body onload="init()">
+	<div>
+		<h2>布易科技</h2>
+		<p>setData方法:Js将数据传递给CAD </p>
+	</div>
+
+	<div class="data-box">
+		<textarea name="SetData" id="SetDataValue" cols="30" rows="8"></textarea>
+	</div>
+	<div style="margin-top: 10px">
+		<button onclick="handleSetData()" style="margin-right: 10px">导入订单SetData</button>
+		<button onclick="RestData()">清空</button>
+	</div>
+</body>
+
+</html>
+
+<script>
+
+	var bowserExplorer = '';//浏览器版本
+	//页面加载函数
+	function init() {
+		bowserExplorer = bowser();
+		GetToken();
+	}
+
+	function bowser() {
+		var explorer = navigator.userAgent.toLowerCase();
+		if (explorer.indexOf("chrome") >= 0)
+			return 'chrome';
+		else
+			return 'ie';
+	}
+
+	//window.external. GetToken	 获得用户身份 设置窗口大小
+	function GetToken() {
+		let token = '';
+		if (bowserExplorer == 'ie')
+			token = window.external.GetToken(1100, 850); // 设置窗口大小
+		else
+			token = window.buyiGetToken(1100, 850);// 设置窗口大小
+
+		//如需要，应该在此通过token进行身份验证
+	}
+
+	//判断数据是否为json
+	function isJSON(str) {
+		if (typeof str == 'string') {
+			try {
+				var obj = JSON.parse(str);
+				if (typeof obj == 'object')
+					return true;
+				else
+					alert('数据格式错误！');
+			}
+			catch (e) {
+				alert(e);
+			}
+		}
+		return false;
+	}
+
+	// 调用setData
+	function handleSetData() {
+		var json = document.getElementById('SetDataValue').value;
+		if (json == '' || json == null) {
+			alert('请在文本框输入数据！');
+		}
+		else {
+			if (isJSON(json) == true) {
+				var type = 'model'; //根据订单类型的不同，选用不同的字符串:	版单数据（model) 成衣生产单数据（order）团订订单数据(td)个订订单数据(gd)
+
+				if (bowserExplorer == 'ie') {
+					//ie浏览器方法
+					var state = window.external.setData(type, JSON.stringify(JSON.parse(json)));
+
+					if (state == 'OK')
+						window.external.closeDialog(0); // 关闭窗口方法
+					else
+						alert(state);
+				}
+				else {
+					//谷歌浏览器 
+					var state = window.buyiSetData(type, JSON.stringify(JSON.parse(json)));
+
+					if (state == 'OK')
+						window.buyiCloseDialog(0);// 关闭窗口方法
+					else
+						alert(state);
+				}
+			}
+
+		}
+
+
+	}
+
+	function RestData() {
+		document.getElementById('SetDataValue').value = '';
+	}
+
+</script>

@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>设置获取令牌</title>
+
+</head>
+<style>
+    .data-box textarea {
+
+        width: 500px;
+        height: auto;
+    }
+</style>
+
+<body>
+    <h2>CAD调用demo</h2>
+    <h4>获得用户身份(令牌)</h4>
+    <p>方法名：
+        <strong>window.external.GetToken()</strong>
+    </p>
+    <div class="data-box">
+        <textarea name="GetData" id="TokenValue" cols="50" rows="5"></textarea>
+    </div>
+    <button onclick="GetTokenData()">触发GetToken</button>
+    <!-- <button onclick="RestData()">重置</button> -->
+
+    <h4>让CAD保存令牌，下次打开网页不需要重新登录</h4>
+    <p>方法名：
+        <strong>window.external.SetToken()</strong>
+    </p>
+    <div class="data-box">
+        <textarea name="SetData" id="SetTokenValue" cols="50" rows="5"></textarea>
+    </div>
+    <button onclick="SetTokenData()">触发SetToken</button>
+    <!-- <button onclick="RestTokenData()">清空</button> -->
+
+    <hr>
+    <h4>关闭浏览器窗口</h4>
+    <p>方法名：
+        <strong>window.external.closeDialog()</strong>
+    </p>
+    <div class="data-box">
+
+    </div>
+    <button onclick="closeDialog()">关闭窗口</button>
+</body>
+
+</html>
+<script onload="init()">
+	var bowserExplorer = '';//浏览器版本
+	//页面加载函数
+	function init(){
+		bowserExplorer = bowser();
+		GetToken(); 
+	}
+
+	function bowser(){
+   	 	var explorer = navigator.userAgent.toLowerCase();
+    		if (explorer.indexOf("chrome") >= 0)
+        		return 'chrome';
+    		else
+        		return 'ie';
+	}
+
+	//获得用户身份 设置窗口大小
+	function GetToken() {
+		let mes = '';
+		if (bowserExplorer == 'ie')
+			mes = window.external.GetToken(1100, 850); // 设置窗口大小
+		else
+			mes = window.buyiGetToken(1100, 850);// 设置窗口大小
+
+		document.getElementById('TokenValue').value = mes;
+	}
+
+	//点击事件获取token
+	function GetTokenData() {
+		GetToken();
+	}
+
+
+	//设置token
+	function SetTokenData() {
+		let mes = document.getElementById('SetTokenValue').value;
+		if (bowserExplorer == 'ie')
+			mes = window.external.SetToken(mes);
+		else
+			mes = window.buyiSetToken(mes);
+
+		alert(mes);//返回值;
+	}
+
+	//触发事件 window.external.closeDialog()
+	function closeDialog() {
+		if (bowserExplorer == 'ie')
+			window.external.closeDialog(0);
+		else
+			window.buyiCloseDialog(0);
+	}
+
+</script>

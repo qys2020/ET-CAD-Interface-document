@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GetData</title>
+  
+</head>
+<script src="./main.js"></script>
+<style>
+
+    .data-box textarea{
+    width: 850px;
+    height: 600px;
+    }
+    body{
+        text-align: center;
+    }
+    button{
+		width: 120px;
+		height: 40px;
+    }
+</style>
+<body onload="init()">
+    <div>
+            <h2>布易科技</h2>
+           <p>getData方法:CAD将数据传递给Js </p>
+    </div>
+     
+    <div class="data-box">
+         <textarea name="SetData" id="GetDataValue" cols="30" rows="10"></textarea>
+    </div>
+    <button onclick="SuregetData()">确认上传</button> 
+</body>
+</html>
+<script>
+	var bowserExplorer = '';//浏览器版本
+	//页面加载函数
+	function init(){
+		bowserExplorer = bowser();
+		GetToken();//获取token
+		getData();//获取数据
+	}
+
+	function bowser(){
+   	 	var explorer = navigator.userAgent.toLowerCase();
+    		if (explorer.indexOf("chrome") >= 0)
+        		return 'chrome';
+    		else
+        		return 'ie';
+	}
+
+	//获得用户身份 设置窗口大小
+	function GetToken() {
+		let token = '';
+		if (bowserExplorer == 'ie')
+			token = window.external.GetToken(1100, 850); // 设置窗口大小
+		else
+			token = window.buyiGetToken(1100, 850);// 设置窗口大小
+
+		//如需要，应该在此通过token进行身份验证
+	}
+
+	function getData() {
+		let json = '';
+		if(bowserExplorer == 'ie')
+			json = window.external.getData();
+		else
+			json = window.buyiGetData();
+		
+		//此时可利用获得的数据，完善页面信息，比如搜索和此数据相关的订单
+		document.getElementById('GetDataValue').value = json;
+	}
+
+	//获取数据 触发getData 获取到数据之后点击上传数据传递给管理系统
+	function SuregetData(){
+
+		//这里应有调用接口把数据上传到管理系统
+		//如果调用成功，则关闭窗口
+
+		if (bowserExplorer == 'ie')
+			window.external.closeDialog(0);
+		else
+			window.buyiCloseDialog(0);
+	}
+
+</script>
