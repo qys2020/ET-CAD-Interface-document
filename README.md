@@ -1,6 +1,6 @@
 # 简介 Abstract
 
-  深圳市布易科技有限公司(www.etsystem.cn)开发的 ET CAD系统，面向客户的 ERP，PDM，PLM，MES，订单管理等系统，开发了一套标准的数据接口，使得CAD和这些系统可以直接交换数据，从而简化用户操作，提高工作效率。
+  深圳市布易科技有限公司 www.etsystem.cn  开发的 ET CAD系统，面向客户的 ERP，PDM，PLM，MES，订单管理等系统，开发了一套标准的数据接口，使得CAD和这些系统可以直接交换数据，从而简化用户操作，提高工作效率。
 
 # 需求 Demand
 
