@@ -1,0 +1,43 @@
+﻿{
+	"id":"100005",
+	"name":"DH100005",
+	"style":"T恤",
+	"type":"T恤",
+	"url":"",
+	"quantity":1,
+	"size_type":1,
+	"size_name":{
+		"base":"",
+		"name":[
+			"S",
+			"M",
+			"L"
+
+		] 
+	},
+	"fabric" : [],
+	"version":[
+		 { 
+			"name":"白色",
+			"downloadURL":"",
+			"fabric":[
+				 { 
+					"id":"60891999915C60",
+					"name":"面料A",
+					"width":160.000000,
+					"details":"",
+					"len_shrinkage":0.000000,
+					"width_shrinkage":0.000000,
+					"price":0.000000,
+					"amount":0.000000 
+				} 
+			],
+			"quantity":[
+				350.000000,
+				200.000000,
+				345.000000
+			] 
+		} 
+	],
+	"size" : []
+}
