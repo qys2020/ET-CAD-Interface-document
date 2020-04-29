@@ -24,6 +24,7 @@
 这里提供这套接口的全套文档和测试工具，其中:
 
 - Docs目录下是全套开发文档
+https://github.com/etsystem/ET-CAD-Interface-document/blob/master/docs/ET%E8%BD%AF%E4%BB%B6%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E-1%E6%9E%B6%E6%9E%84%E7%BB%BC%E8%BF%B0.pdf
 
 - Json目录下是为接口定义的所有json结构
 
